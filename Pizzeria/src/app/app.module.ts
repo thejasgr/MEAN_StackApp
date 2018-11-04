@@ -15,6 +15,9 @@ import { CartComponent } from './cart/cart.component';
 import { HttpService } from './http.service';
 import { LoginHomeComponent } from './login-home/login-home.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 @NgModule({
   declarations: [
@@ -27,7 +30,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     NavbarComponent,
   ],
   imports: [
-    BrowserModule, BrowserAnimationsModule, MatCheckboxModule, MatCardModule,ReactiveFormsModule, FormsModule, HttpClientModule, RouterModule.forRoot(
+    BrowserModule, BrowserAnimationsModule,MatSnackBarModule, MatCheckboxModule,MatProgressBarModule, MatCardModule,ReactiveFormsModule, FormsModule, HttpClientModule, RouterModule.forRoot(
       [
         {
           path: '', component: HomeScreenComponent

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class PizzaOrderComponent implements OnInit {
   price;
   type;
   pizzaArray = new Array();
-  ingredientsArray;
+  ingredientsArray= new Array();
   count = 0;
   countArray = new Array();
   /*  pizzaCounter = new Array();
@@ -31,7 +32,7 @@ export class PizzaOrderComponent implements OnInit {
 
 
 
-  constructor(private pizza: HttpService, private router: Router) { }
+  constructor(private pizza: HttpService, private router: Router,private toast:MatSnackBar) { }
 
   ngOnInit() {
     this.pizza.getpizzainfo().subscribe((res: []) => {
@@ -46,7 +47,7 @@ export class PizzaOrderComponent implements OnInit {
             ++this.count;
           }); */
     });
-    this.pizza.getingredientsinfo().subscribe((resp) => {
+    this.pizza.getingredientsinfo().subscribe((resp:[]) => {
       this.ingredientsArray = resp;
     });
 
@@ -62,7 +63,7 @@ export class PizzaOrderComponent implements OnInit {
     this.pizza.addToCart(pizzaid, this.ingredienttopping[pizzaid - 1], totalAddOnPrice, totalBasePrice,this.countArray[pizzaid - 1]).subscribe((res1) => {
       console.log(res1);
     });
-
+    this.toast.open('Added to cart', 'arigato', { duration: 3000 });
   }
   addToOrder(status, pizzaid, ingName, price) {
     /*  if (this.OrderArray.length == 0 && event.target.checked) {
