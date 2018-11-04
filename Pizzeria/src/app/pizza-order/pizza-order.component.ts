@@ -38,6 +38,8 @@ export class PizzaOrderComponent implements OnInit {
       this.pizzaArray = res;
       for (let i = 0; i < this.pizzaArray.length; i++) {
         this.countArray[i] = 1;
+        this.addonArray.push(0);
+        this.totalArray[i] = this.pizzaArray[i].price;
       }
       /*     res.forEach(e => {
             this.orderArray.push(this.count);
@@ -53,6 +55,7 @@ export class PizzaOrderComponent implements OnInit {
 
   }
   addToCart(pizzaid) {
+    console.log(this.addonArray[pizzaid-1])
     var totalAddOnPrice = this.addonArray[pizzaid - 1] * this.countArray[pizzaid - 1];
     var totalBasePrice = this.totalArray[pizzaid - 1] * this.countArray[pizzaid - 1];
 
@@ -79,8 +82,8 @@ export class PizzaOrderComponent implements OnInit {
       for (let i = 0; i < this.pizzaArray.length; i++) {
         this.orderArray.push(i + 1);
         this.ingredienttopping.push([]);
-        this.addonArray[i] = 0;
-        this.totalArray[i] = this.pizzaArray[i].price;
+        
+        
 
       }
       console.log(this.orderArray);
@@ -98,8 +101,11 @@ export class PizzaOrderComponent implements OnInit {
       console.log(this.ingredienttopping);
     } else {
       if (this.ingredienttopping[index].includes(ingName)) {
-        this.ingredienttopping[index].splice(index, 1);
+        console.log("working"+index);
+        var ingIndex= this.ingredienttopping[index].indexOf(ingName)
+        this.ingredienttopping[index].splice(ingIndex, 1);
         this.addonArray[index] -= price;
+        console.log(this.ingredienttopping)
         // this.totalArray[index] -= price;
       }
     }

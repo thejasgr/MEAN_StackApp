@@ -162,4 +162,35 @@ app.get('/getCart', function (req, res) {
     dbOperation(req, res, 'getCart');
 })
 
+
+app.post('/removeFromCart',jsonParser,function(req,res){
+    mongoClient.connect(url,function(err,client){
+
+        if(err){
+
+            console.log('Unable to connect to the mongoDB server.Error:',err);
+        }
+        else{
+            console.log('connected remove from server');
+            console.log(typeof(req.body._id));
+            const db = client.db(dbName);
+            x= (req.body._id)
+            var o_id = new mongodb.ObjectID(req.body._id);
+            db.collection("cart").find({"_id" : o_id}).toArray(function(err,result){
+                if(err){
+                    res.send(err);
+                }
+
+                else{
+                    console.log(result)
+                    db.collection('cart').deleteOne({"_id":result[0]._id});
+                }     
+            })
+            console.log('removed from cart');
+            }
+    })
+    client.close();
+});
+
+
 app.listen(3000, () => console.log('Server listening on port 3000'));

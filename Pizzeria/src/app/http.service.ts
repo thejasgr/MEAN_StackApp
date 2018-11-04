@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -20,4 +20,8 @@ export class HttpService {
   getCart() {
     return this.httpclient.get(this.url + 'getCart');
   }
+
+  removeCartData(id){
+    return this.httpclient.post(this.url+"removeFromCart",{"_id":id},{headers: new HttpHeaders ().set('Content-Type','application/json')});
+   }
 }

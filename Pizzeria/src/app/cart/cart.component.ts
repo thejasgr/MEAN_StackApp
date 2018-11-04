@@ -61,6 +61,7 @@ export class CartComponent implements OnInit {
 }
 */
   cartItems;
+  grandTotal =0;
 
   constructor(private httpService: HttpService) { }
 
@@ -69,11 +70,16 @@ export class CartComponent implements OnInit {
       res => {
         this.cartItems = res;
         console.log(res);
+        for (let i = 0; i < this.cartItems.length; i++) {
+          this.grandTotal += this.cartItems[i].total+this.cartItems[i].addOnPrice;
+        }
       }
     );
   }
-  removeFromCart() {
-
+  removeFromCart(_id) {
+    this.httpService.removeCartData(_id).subscribe(res => {
+      console.log(res);
+    })
   }
 
 }
