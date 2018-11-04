@@ -18,6 +18,9 @@
                             </div>
                             <h3>Price:</h3>
                             {{item.price}}<br>
+                            <div *ngFor="let item1 of ingredienttopping[i]">
+                                {{item1}}
+                            </div>
                         </mat-card-subtitle>
                     </mat-card-header>
                 </div>

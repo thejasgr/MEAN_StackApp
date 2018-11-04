@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
@@ -13,6 +13,8 @@ import { PizzaOrderComponent } from './pizza-order/pizza-order.component';
 import { BuildUrPizzaComponent } from './build-ur-pizza/build-ur-pizza.component';
 import { CartComponent } from './cart/cart.component';
 import { HttpService } from './http.service';
+import { LoginHomeComponent } from './login-home/login-home.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -21,9 +23,11 @@ import { HttpService } from './http.service';
     PizzaOrderComponent,
     BuildUrPizzaComponent,
     CartComponent,
+    LoginHomeComponent,
+    NavbarComponent,
   ],
   imports: [
-    BrowserModule, BrowserAnimationsModule, MatCheckboxModule, MatCardModule, FormsModule, HttpClientModule, RouterModule.forRoot(
+    BrowserModule, BrowserAnimationsModule, MatCheckboxModule, MatCardModule,ReactiveFormsModule, FormsModule, HttpClientModule, RouterModule.forRoot(
       [
         {
           path: '', component: HomeScreenComponent
@@ -36,6 +40,9 @@ import { HttpService } from './http.service';
         },
         {
           path: 'ShoppingCart', component: CartComponent
+        },
+        {
+          path:'navbar',component:NavbarComponent
         }
       ]
     )

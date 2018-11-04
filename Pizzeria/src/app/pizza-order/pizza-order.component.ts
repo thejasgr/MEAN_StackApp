@@ -59,7 +59,7 @@ export class PizzaOrderComponent implements OnInit {
     var totalAddOnPrice = this.addonArray[pizzaid - 1] * this.countArray[pizzaid - 1];
     var totalBasePrice = this.totalArray[pizzaid - 1] * this.countArray[pizzaid - 1];
 
-    this.pizza.addToCart(pizzaid, this.ingredienttopping[pizzaid - 1], totalAddOnPrice, totalBasePrice).subscribe((res1) => {
+    this.pizza.addToCart(pizzaid, this.ingredienttopping[pizzaid - 1], totalAddOnPrice, totalBasePrice,this.countArray[pizzaid - 1]).subscribe((res1) => {
       console.log(res1);
     });
 

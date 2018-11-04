@@ -1,0 +1,37 @@
+<p>
+  login-home works!
+</p>
+<div class="jumbotron jumbotron-fluid" >
+    <br><br><br><br>
+    <form [formGroup]="formDetails" (ngSubmit)="validate(formDetails.value)">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-offset-5">
+            <h2>Login</h2>
+            <label>
+              UserID:
+              <input type="text" id="input1" class="form-control col-md-7" formControlName="userID" placeholder="Enter UserID">
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-offset-5">
+            <label>
+              Password:
+              <input type="password" id="input2" class="form-control col-md-7" formControlName="password" placeholder="Enter Password">
+            </label>
+            <div>
+              <button type="submit" class="btn btn-primary col-md-2">Login</button> 
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </div>
+
+      <router-outlet></router-outlet>
+  
+  
+

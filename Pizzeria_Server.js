@@ -32,11 +32,40 @@ function dbOperation(req, res, flagValue) {
                 addToCart(req, res);
             } else if (flagValue == 'getCart') {
                 getCart(res);
-            }
+            }else if (flagValue == 'loginValidation')
+            loginValidation(req, res);
 
         }
     });
-}
+};
+
+function loginValidation(req, res) {
+    if (db != null) {
+        console.log("hahah");
+        db.collection('userdetails').find({ userID: { $eq: req.body.userID } }, { userID: 1, password: 1 }).toArray(
+            function (err, result) {
+                if (err) {
+                    console.log('error');
+                }
+                else {
+                    console.log(result)
+                    console.log("no error"+req.body.password+"=="+result[0].password)
+                    if (req.body.password == result[0].password) {
+                        console.log('Successful Login')
+                        msg={"status":true}
+                        res.send(msg);
+                    }else{
+                        console.log("password dont")
+                    }
+                    
+                
+                }
+            }
+        );
+    }
+};
+
+
 function getCart(res) {
     console.log('connected cart data');
     if (db != null) {
@@ -112,7 +141,7 @@ function addToCart(req, res) {
             }
             else {
                 console.log("working");
-                console.log(typeof (req.body.id));
+                console.log(req.body.count);
 
                 db.collection('cart').insertOne({
                     "id": result[0].id,
@@ -123,7 +152,7 @@ function addToCart(req, res) {
                     "description": result[0].description,
                     "ingredients": result[0].ingredients,
                     "topping": result[0].topping.sort(1),
-                    "quant": 1,
+                    "quant": req.body.count,
                     "addOns": req.body.topping,
                     "addOnPrice": req.body.addOnPrice,
                     "total": req.body.total
@@ -190,6 +219,11 @@ app.post('/removeFromCart',jsonParser,function(req,res){
             }
     })
     client.close();
+});
+
+app.post('/loginValidation',jsonParser, function (req, res) {
+    console.log(req.body);
+    dbOperation(req, res, 'loginValidation');
 });
 
 

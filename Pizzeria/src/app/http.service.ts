@@ -14,8 +14,9 @@ export class HttpService {
   getingredientsinfo() {
     return this.httpclient.get(this.url + 'getingredients');
   }
-  addToCart(pizzaid, ingredients, addOnPrice, total) {
-    return this.httpclient.post(this.url + 'addToCart', { 'id': pizzaid, 'topping': ingredients, 'addOnPrice': addOnPrice, 'total': total });
+  addToCart(pizzaid, ingredients, addOnPrice, total,count) {
+    console.log(count);
+    return this.httpclient.post(this.url + 'addToCart', { 'id': pizzaid, 'topping': ingredients, 'addOnPrice': addOnPrice, 'total': total ,'count':count});
   }
   getCart() {
     return this.httpclient.get(this.url + 'getCart');
@@ -23,5 +24,10 @@ export class HttpService {
 
   removeCartData(id){
     return this.httpclient.post(this.url+"removeFromCart",{"_id":id},{headers: new HttpHeaders ().set('Content-Type','application/json')});
+   }   
+
+   validate(body){
+    console.log(body);
+    return this.httpclient.post(this.url + 'loginValidation', body, {headers: new HttpHeaders ().set('Content-Type','application/json')});
    }
 }

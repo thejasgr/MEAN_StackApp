@@ -79,7 +79,7 @@ export class CartComponent implements OnInit {
   removeFromCart(_id) {
     this.httpService.removeCartData(_id).subscribe(res => {
       console.log(res);
-    })
+    });
   }
 
 }

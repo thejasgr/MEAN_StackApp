@@ -9,7 +9,5 @@ import { Router } from '@angular/router';
 export class AppComponent {
   constructor(private router: Router) { }
   title = 'Pizzeria';
-  routeToCart() {
-    this.router.navigate(['ShoppingCart']);
-  }
+  
 }
