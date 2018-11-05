@@ -6,7 +6,7 @@ const mongodb = require('mongodb');
 const jsonParser = bodyParser.json();
 
 
-var dbName = 'Pizzeria_database';
+var dbName = 'project';
 var db = null;
 var mongoClient = mongodb.MongoClient;
 const url = "mongodb://localhost:27017";

@@ -27,7 +27,6 @@ export class HttpService {
    }   
 
    validate(body){
-    console.log(body);
     return this.httpclient.post(this.url + 'loginValidation', body, {headers: new HttpHeaders ().set('Content-Type','application/json')});
    }
 }

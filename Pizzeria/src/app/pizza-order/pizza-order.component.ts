@@ -19,11 +19,9 @@ export class PizzaOrderComponent implements OnInit {
   price;
   type;
   pizzaArray = new Array();
-  ingredientsArray= new Array();
+  ingredientsArray = new Array();
   count = 0;
   countArray = new Array();
-  /*  pizzaCounter = new Array();
-  totalPizza: number; */
   ingredienttopping = new Array();
   orderArray = new Array();  //
   addonArray = new Array();
@@ -32,7 +30,7 @@ export class PizzaOrderComponent implements OnInit {
 
 
 
-  constructor(private pizza: HttpService, private router: Router,private toast:MatSnackBar) { }
+  constructor(private pizza: HttpService, private router: Router, private toast: MatSnackBar) { }
 
   ngOnInit() {
     this.pizza.getpizzainfo().subscribe((res: []) => {
@@ -42,72 +40,45 @@ export class PizzaOrderComponent implements OnInit {
         this.addonArray.push(0);
         this.totalArray[i] = this.pizzaArray[i].price;
       }
-      /*     res.forEach(e => {
-            this.orderArray.push(this.count);
-            ++this.count;
-          }); */
     });
-    this.pizza.getingredientsinfo().subscribe((resp:[]) => {
+    this.pizza.getingredientsinfo().subscribe((resp: []) => {
       this.ingredientsArray = resp;
     });
-
-    console.log(this.countArray);
-
-
   }
   addToCart(pizzaid) {
-    console.log(this.addonArray[pizzaid-1])
     var totalAddOnPrice = this.addonArray[pizzaid - 1] * this.countArray[pizzaid - 1];
     var totalBasePrice = this.totalArray[pizzaid - 1] * this.countArray[pizzaid - 1];
 
-    this.pizza.addToCart(pizzaid, this.ingredienttopping[pizzaid - 1], totalAddOnPrice, totalBasePrice,this.countArray[pizzaid - 1]).subscribe((res1) => {
-      console.log(res1);
+    this.pizza.addToCart(pizzaid, this.ingredienttopping[pizzaid - 1], totalAddOnPrice, totalBasePrice, this.countArray[pizzaid - 1]).subscribe((res1) => {
     });
     this.toast.open('Added to cart', 'arigato', { duration: 3000 });
   }
   addToOrder(status, pizzaid, ingName, price) {
-    /*  if (this.OrderArray.length == 0 && event.target.checked) {
-       this.OrderArray.push(pizzaname);
-       this.OrderArray.push(ingname);
-     } else if (event.target.checked) {
-       this.OrderArray.push(ingname);
-     } else if (!event.target.checked) {
-       const deleteindex = this.OrderArray.indexOf(ingname);
-       this.OrderArray.splice(deleteindex, 1);
-     } */
-
-    console.log(status);
-    console.log(this.orderArray);
     if (this.orderArray.length == 0) {
-      console.log('pizza' + this.pizzaArray.length);
       for (let i = 0; i < this.pizzaArray.length; i++) {
         this.orderArray.push(i + 1);
         this.ingredienttopping.push([]);
-        
-        
-
       }
-      console.log(this.orderArray);
+
     }
     const index = this.orderArray.indexOf(pizzaid);
 
-    console.log(index);
+
     if (status) {
-      // this.total=basePrice+this.total+this.price;
+
       if (!(this.ingredienttopping[index].includes(ingName))) {
         this.ingredienttopping[index].push(ingName);
         this.addonArray[index] += price;
-        // this.totalArray[index] += price;
+
       }
-      console.log(this.ingredienttopping);
+     
     } else {
       if (this.ingredienttopping[index].includes(ingName)) {
-        console.log("working"+index);
-        var ingIndex= this.ingredienttopping[index].indexOf(ingName)
+
+        var ingIndex = this.ingredienttopping[index].indexOf(ingName)
         this.ingredienttopping[index].splice(ingIndex, 1);
         this.addonArray[index] -= price;
-        console.log(this.ingredienttopping)
-        // this.totalArray[index] -= price;
+
       }
     }
   }
@@ -121,7 +92,7 @@ export class PizzaOrderComponent implements OnInit {
   }
 
   quantDecrease(pizzId) {
-    console.log(pizzId);
+
     if (this.countArray[pizzId - 1] > 1) {
       this.countArray[pizzId - 1]--;
     }

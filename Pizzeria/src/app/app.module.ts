@@ -10,7 +10,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AppComponent } from './app.component';
 import { HomeScreenComponent } from './home-screen/home-screen.component';
 import { PizzaOrderComponent } from './pizza-order/pizza-order.component';
-import { BuildUrPizzaComponent } from './build-ur-pizza/build-ur-pizza.component';
+
 import { CartComponent } from './cart/cart.component';
 import { HttpService } from './http.service';
 import { LoginHomeComponent } from './login-home/login-home.component';
@@ -24,7 +24,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     AppComponent,
     HomeScreenComponent,
     PizzaOrderComponent,
-    BuildUrPizzaComponent,
     CartComponent,
     LoginHomeComponent,
     NavbarComponent,
@@ -37,9 +36,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
         },
         {
           path: 'OrderPizza', component: PizzaOrderComponent
-        },
-        {
-          path: 'Customize', component: BuildUrPizzaComponent
         },
         {
           path: 'ShoppingCart', component: CartComponent
